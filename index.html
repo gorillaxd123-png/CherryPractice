@@ -35,7 +35,6 @@
         #login-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Login Background GIF */
             background: url('https://www.icegif.com/wp-content/uploads/2022/03/icegif-581.gif') no-repeat center center;
             background-size: cover;
             display: flex;
@@ -154,11 +153,17 @@
             text-align: center;
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 4rem 1.5rem; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            margin-top: 3rem;
+        }
 
         .ranks-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
 
@@ -175,11 +180,18 @@
 
         .rank-card img.card-bg {
             position: absolute;
-            bottom: -20px;
-            right: -20px;
-            width: 100px;
-            opacity: 0.2;
+            bottom: -15px;
+            right: -15px;
+            width: 80px;
+            opacity: 0.15;
             pointer-events: none;
+        }
+
+        .division-icon {
+            width: 40px;
+            height: 40px;
+            vertical-align: middle;
+            margin-right: 10px;
         }
 
         .rank-card:hover { border-color: var(--cherry-pink); box-shadow: 0 10px 30px rgba(255, 183, 197, 0.4); }
@@ -193,7 +205,7 @@
             font-weight: 700;
         }
 
-        .rank-name { font-size: 1.6rem; margin: 10px 0; }
+        .rank-name { font-size: 1.5rem; margin: 10px 0; }
 
         .req-box {
             background: rgba(255, 249, 250, 0.8);
@@ -209,7 +221,7 @@
 
         .video-section {
             max-width: 800px;
-            margin: 40px auto;
+            margin: 60px auto;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
@@ -252,7 +264,7 @@
         </div>
 
         <div class="search-container">
-            <input type="text" id="rank-search" placeholder="Search for ranks..." onkeyup="filterRanks()">
+            <input type="text" id="rank-search" placeholder="Search for ranks or divisions..." onkeyup="filterContent()">
         </div>
 
         <div class="social-buttons">
@@ -267,76 +279,107 @@
 
     <header class="hero">
         <h1 style="color: var(--deep-pink); text-shadow: 2px 2px 0px white;">CHERRY PRACTICE</h1>
-        <p style="font-weight: 600; background: rgba(255,255,255,0.5); display: inline-block; padding: 2px 10px; border-radius: 5px;">Rank Achievement Guide</p>
     </header>
 
     <div class="container">
-        <div class="ranks-grid" id="ranks-grid">
+        
+        <div class="section-title">
+            <h2 style="color: var(--deep-pink); background: rgba(255,255,255,0.6); display: inline-block; padding: 5px 20px; border-radius: 10px;">Rank Achievement Guide</h2>
+        </div>
+
+        <div class="ranks-grid">
             <div class="rank-card">
-                <img src="https://www.transparentpng.com/download/cherry-blossom/pink-cherry-blossom-free-png-7.png" class="card-bg">
                 <span class="badge">Social</span>
                 <h2 class="rank-name c-creator">Creator</h2>
                 <div class="req-box">
                     <strong>PERKS:</strong>
-                    <ul>
-                        <li>Discord Specialist Role</li>
-                        <li>Unique Server Rank</li>
-                        <li>YouTube Channel Promotion</li>
-                    </ul>
+                    <ul><li>Discord Specialist Role</li><li>Unique Server Rank</li><li>YouTube Channel Promotion</li></ul>
                 </div>
             </div>
-
             <div class="rank-card">
-                <img src="https://www.transparentpng.com/download/cherry-blossom/pink-cherry-blossom-free-png-7.png" class="card-bg">
                 <span class="badge">Skill</span>
                 <h2 class="rank-name c-elite">Elite</h2>
                 <div class="req-box">
                     <strong>PERKS:</strong>
-                    <ul>
-                        <li>Elite Discord Rank</li>
-                        <li>Elite Server Role</li>
-                        <li>Extra Win Bonus</li>
-                    </ul>
+                    <ul><li>Elite Discord Rank</li><li>Elite Server Role</li><li>Extra Win Bonus</li></ul>
                 </div>
             </div>
-
             <div class="rank-card">
-                <img src="https://www.transparentpng.com/download/cherry-blossom/pink-cherry-blossom-free-png-7.png" class="card-bg">
                 <span class="badge">Placement</span>
                 <h2 class="rank-name c-champ">Champion</h2>
                 <div class="req-box">
                     <strong>PERKS:</strong>
-                    <ul>
-                        <li>Exclusive Discord Role</li>
-                        <li>Champion Server Rank</li>
-                    </ul>
+                    <ul><li>Exclusive Discord Role</li><li>Champion Server Rank</li></ul>
                 </div>
             </div>
-
             <div class="rank-card">
-                <img src="https://www.transparentpng.com/download/cherry-blossom/pink-cherry-blossom-free-png-7.png" class="card-bg">
                 <span class="badge">Killer</span>
                 <h2 class="rank-name c-mvp">MVP</h2>
                 <div class="req-box">
                     <strong>PERKS:</strong>
-                    <ul>
-                        <li>50 Party Member Limit</li>
-                        <li>Extra Bonus on Wins</li>
-                        <li>MVP Discord & Server Rank</li>
-                    </ul>
+                    <ul><li>50 Party Member Limit</li><li>Extra Bonus on Wins</li><li>MVP Discord & Server Rank</li></ul>
                 </div>
             </div>
-
             <div class="rank-card">
-                <img src="https://www.transparentpng.com/download/cherry-blossom/pink-cherry-blossom-free-png-7.png" class="card-bg">
                 <span class="badge">Activity</span>
                 <h2 class="rank-name c-vip">VIP</h2>
                 <div class="req-box">
                     <strong>PERKS:</strong>
+                    <ul><li>25 Party Member Limit</li><li>Join Full Server Access</li><li>VIP Discord & Minecraft Rank</li></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <h2 style="color: var(--deep-pink); background: rgba(255,255,255,0.6); display: inline-block; padding: 5px 20px; border-radius: 10px;">Divisions Achievement Guide</h2>
+        </div>
+
+        <div class="ranks-grid">
+            <!-- Iron Divisions -->
+            <div class="rank-card">
+                <img src="https://i.pinimg.com/originals/08/93/94/0893944aba45ab7279c850c0dff1dcbc.png" class="division-icon">
+                <h2 class="rank-name">Iron Division</h2>
+                <div class="req-box">
                     <ul>
-                        <li>25 Party Member Limit</li>
-                        <li>Join Full Server Access</li>
-                        <li>VIP Discord & Minecraft Rank</li>
+                        <li>Iron 1: 0 Elo needed</li>
+                        <li>Iron 2: 50 Elo needed</li>
+                        <li>Iron 3: 80 Elo needed</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Gold Divisions -->
+            <div class="rank-card">
+                <img src="https://minecraft-max.net/upload/iblock/7ce/7ce453b2c15976410d9998236dbf424e.png" class="division-icon">
+                <h2 class="rank-name">Gold Division</h2>
+                <div class="req-box">
+                    <ul>
+                        <li>Gold 1: 100 Elo needed</li>
+                        <li>Gold 2: 400 Elo needed</li>
+                        <li>Gold 3: 500 Elo needed</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Diamond Divisions -->
+            <div class="rank-card">
+                <img src="https://www.pngkey.com/png/full/51-510502_diamond-pattern-png.png" class="division-icon">
+                <h2 class="rank-name">Diamond Division</h2>
+                <div class="req-box">
+                    <ul>
+                        <li>Diamond 1: 600 Elo needed</li>
+                        <li>Diamond 2: 700 Elo needed</li>
+                        <li>Diamond 3: 800 Elo needed</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Emerald Divisions -->
+            <div class="rank-card">
+                <img src="https://pngset.com/images/minecraft-emerald-green-graphics-art-lighting-transparent-png-854566.png" class="division-icon">
+                <h2 class="rank-name">Emerald Division</h2>
+                <div class="req-box">
+                    <ul>
+                        <li>Emerald 1: 900 Elo needed</li>
+                        <li>Emerald 2: 1000 Elo needed</li>
+                        <li>Emerald 3: 1100 Elo needed</li>
                     </ul>
                 </div>
             </div>
@@ -352,7 +395,6 @@
     </footer>
 
     <script>
-        // Check for saved login on load
         window.onload = function() {
             const savedUser = localStorage.getItem('cherry_username');
             if (savedUser) {
@@ -367,15 +409,10 @@
                 alert("Please enter a username!");
                 return;
             }
-
             localStorage.setItem('cherry_username', user);
-            
             const overlay = document.getElementById('login-overlay');
             overlay.style.opacity = '0';
-            setTimeout(() => {
-                overlay.style.display = 'none';
-            }, 500);
-
+            setTimeout(() => { overlay.style.display = 'none'; }, 500);
             applyLogin(user);
         }
 
@@ -385,13 +422,12 @@
             document.getElementById('profile').style.visibility = 'visible';
         }
 
-        function filterRanks() {
+        function filterContent() {
             let input = document.getElementById('rank-search').value.toLowerCase();
             let cards = document.getElementsByClassName('rank-card');
-
             for (let i = 0; i < cards.length; i++) {
-                let name = cards[i].getElementsByClassName('rank-name')[0].innerText.toLowerCase();
-                if (name.includes(input)) {
+                let text = cards[i].innerText.toLowerCase();
+                if (text.includes(input)) {
                     cards[i].style.display = "block";
                 } else {
                     cards[i].style.display = "none";
