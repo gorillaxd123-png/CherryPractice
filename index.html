@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cherry Practice | Rank Hall</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Added Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -26,15 +25,14 @@
             color: var(--text-dark);
             line-height: 1.6;
             overflow-x: hidden;
-            /* Background GIF */
+            /* Updated Background GIF */
             background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), 
-                        url('https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueXF4ZzR6ZzR6ZzR6ZzR6ZzR6ZzR6ZzR6ZzR6ZzR6ZzR6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKVUn7iM8FMEU24/giphy.gif');
+                        url('https://media.tenor.com/r3MeBihAouQAAAAC/cherry-blossom-anime.gif');
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
         }
 
-        /* Login Overlay */
         #login-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -80,7 +78,6 @@
 
         .login-box button:hover { background: var(--deep-pink); }
 
-        /* Top Navigation Bar */
         nav {
             position: sticky;
             top: 0;
@@ -94,12 +91,11 @@
             z-index: 900;
         }
 
-        /* Top Left: Player Profile */
         .player-profile {
             display: flex;
             align-items: center;
             gap: 10px;
-            visibility: hidden; /* Shown after login */
+            visibility: hidden;
         }
 
         .player-head {
@@ -114,7 +110,6 @@
             color: var(--deep-pink);
         }
 
-        /* Top Right: Socials */
         .social-buttons {
             display: flex;
             gap: 15px;
@@ -137,7 +132,6 @@
         .btn-youtube { background: var(--youtube); }
         .social-btn:hover { opacity: 0.8; transform: translateY(-2px); }
 
-        /* Rest of UI */
         .hero {
             padding: 4rem 1rem;
             text-align: center;
@@ -198,7 +192,6 @@
 
         footer { text-align: center; padding: 3rem; color: #4a4a4a; font-weight: 600; text-shadow: 0 0 10px white; }
 
-        /* Rank Colors */
         .c-creator { color: #FF0000; }
         .c-elite { color: #D4AF37; }
         .c-champ { color: #5dade2; }
@@ -209,7 +202,6 @@
 </head>
 <body>
 
-    <!-- Login Section -->
     <div id="login-overlay">
         <div class="login-box">
             🌸
@@ -221,7 +213,6 @@
         </div>
     </div>
 
-    <!-- Header Navigation -->
     <nav>
         <div class="player-profile" id="profile">
             <img src="" id="head-img" class="player-head" alt="Head">
@@ -264,7 +255,14 @@
                 <img src="https://www.transparentpng.com/download/cherry-blossom/pink-cherry-blossom-free-png-7.png" class="card-bg">
                 <span class="badge">Skill</span>
                 <h2 class="rank-name c-elite">Elite</h2>
-                <div class="req-box"><strong>HOW:</strong> Reach Gold 3 in any gamemode.</div>
+                <div class="req-box">
+                    <strong>PERKS:</strong>
+                    <ul>
+                        <li>Elite Discord Rank</li>
+                        <li>Elite Server Role</li>
+                        <li>Extra Win Bonus</li>
+                    </ul>
+                </div>
             </div>
 
             <div class="rank-card">
@@ -287,9 +285,9 @@
                 <div class="req-box">
                     <strong>PERKS:</strong>
                     <ul>
+                        <li>50 Party Member Limit</li>
                         <li>Extra Bonus on Wins</li>
-                        <li>MVP Discord Rank</li>
-                        <li>MVP Server Rank</li>
+                        <li>MVP Discord & Server Rank</li>
                     </ul>
                 </div>
             </div>
@@ -301,9 +299,9 @@
                 <div class="req-box">
                     <strong>PERKS:</strong>
                     <ul>
-                        <li>VIP Discord & Minecraft Rank</li>
+                        <li>25 Party Member Limit</li>
                         <li>Join Full Server Access</li>
-                        <li>Priority Support & More</li>
+                        <li>VIP Discord & Minecraft Rank</li>
                     </ul>
                 </div>
             </div>
