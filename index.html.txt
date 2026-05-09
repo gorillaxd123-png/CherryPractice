@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cherry Practice | Server Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cherry-pink: #ffb7c5;
+            --soft-pink: #ffe4e1;
+            --deep-pink: #ff8fa3;
+            --pure-white: #ffffff;
+            --text-dark: #4a4a4a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--pure-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background Decoration */
+        body::before {
+            content: "🌸";
+            position: fixed;
+            top: -50px;
+            left: -50px;
+            font-size: 300px;
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        /* Header / Admin Style Panel */
+        header {
+            background: var(--pure-white);
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 3px solid var(--soft-pink);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--deep-pink);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-subtext {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 1rem;
+            text-align: center;
+            background: linear-gradient(180deg, var(--soft-pink) 0%, var(--pure-white) 100%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #666;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 1rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            font-size: 2.2rem;
+        }
+
+        .section-title span {
+            color: var(--deep-pink);
+        }
+
+        /* Rank Grid */
+        .ranks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .rank-card {
+            background: var(--pure-white);
+            border: 1px solid var(--soft-pink);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rank-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 30px rgba(255, 183, 197, 0.4);
+            border-color: var(--cherry-pink);
+        }
+
+        /* Featured Rank Highlight */
+        .rank-card.featured {
+            border: 2px solid var(--deep-pink);
+            scale: 1.05;
+        }
+
+        .rank-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--deep-pink);
+            margin-bottom: 0.5rem;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: #999;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2.5rem;
+            text-align: left;
+        }
+
+        .features-list li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.8rem;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .features-list li::before {
+            content: '🌸';
+            position: absolute;
+            left: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Button Styling */
+        .buy-btn {
+            display: block;
+            width: 100%;
+            background: var(--cherry-pink);
+            color: white;
+            padding: 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .buy-btn:hover {
+            background: var(--deep-pink);
+            box-shadow: 0 5px 15px rgba(255, 143, 163, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem 1rem;
+            background: #fdf2f4;
+            margin-top: 5rem;
+        }
+
+        .footer-links {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: var(--deep-pink);
+            font-weight: 600;
+        }
+
+        /* Responsive Fixes */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .rank-card.featured { scale: 1; }
+            .ranks-grid { gap: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Cherry Practice</div>
+        <div class="nav-subtext">Official Minecraft Server Store</div>
+    </header>
+
+    <section class="hero">
+        <h1>Support the <span>Bloom</span></h1>
+        <p>Unlock exclusive ranks, custom cosmetics, and powerful abilities to enhance your gameplay experience on Cherry Practice.</p>
+    </section>
+
+    <div class="container">
+        <h2 class="section-title">Available <span>Ranks</span></h2>
+        
+        <div class="ranks-grid">
+            <!-- Rank 1: Sakura -->
+            <div class="rank-card">
+                <div class="rank-name">Sakura</div>
+                <div class="price">$5.00 <span>/ monthly</span></div>
+                <ul class="features-list">
+                    <li>Pink Chat Prefix & Color</li>
+                    <li>Priority Queue Access</li>
+                    <li>Basic Particle Effects</li>
+                    <li>Access to /kit sakura</li>
+                </ul>
+                <button class="buy-btn" onclick="openStore('Sakura')">Purchase Rank</button>
+            </div>
+
+            <!-- Rank 2: Shogun (Featured) -->
+            <div class="rank-card featured">
+                <div class="rank-name">Shogun</div>
+                <div class="price">$15.00 <span>/ monthly</span></div>
+                <ul class="features-list">
+                    <li>All Sakura Rank Perks</li>
+                    <li>Ability to Fly (/fly)</li>
+                    <li>Access to /workbench & /ec</li>
+                    <li>5x Set-Home Locations</li>
+                    <li>Exclusive Shogun Pet</li>
+                </ul>
+                <button class="buy-btn" style="background: var(--deep-pink);" onclick="openStore('Shogun')">Purchase Rank</button>
+            </div>
+
+            <!-- Rank 3: Tenno -->
+            <div class="rank-card">
+                <div class="rank-name">Tenno</div>
+                <div class="price">$50.00 <span>/ permanent</span></div>
+                <ul class="features-list">
+                    <li>All Shogun & Sakura Perks</li>
+                    <li>Custom In-game Nickname</li>
+                    <li>Exclusive Discord Role</li>
+                    <li>Monthly Cosmetic Crate Key</li>
+                    <li>Infinite Set-Home Locations</li>
+                </ul>
+                <button class="buy-btn" onclick="openStore('Tenno')">Purchase Rank</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#">Home</a>
+            <a href="#">Rules</a>
+            <a href="#">Discord</a>
+            <a href="#">Support</a>
+        </div>
+        <p>&copy; 2026 Cherry Practice. All rights reserved.</p>
+        <p style="font-size: 0.75rem; color: #999; margin-top: 15px;">
+            Cherry Practice is NOT affiliated with Mojang AB or Microsoft.
+        </p>
+    </footer>
+
+    <script>
+        function openStore(rank) {
+            console.log("Redirecting to checkout for: " + rank);
+            alert("Thank you for choosing the " + rank + " rank! You are now being redirected to the secure payment gateway.");
+        }
+
+        // Smooth scroll appearance
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.rank-card').forEach(card => {
+            card.style.opacity = "0";
+            card.style.transform = "translateY(20px)";
+            card.style.transition = "all 0.6s ease-out";
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
