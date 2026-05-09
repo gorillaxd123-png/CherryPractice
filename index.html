@@ -100,9 +100,9 @@
             padding: 5px 15px; border-radius: 50px; font-size: 0.8rem;
             cursor: pointer; margin-top: 10px; font-weight: 600; transition: 0.3s;
         }
-        .view-btn:hover { background: var(--deep-pink); }
 
         .req-box { background: rgba(255, 249, 250, 0.8); border-left: 4px solid var(--cherry-pink); padding: 12px; margin: 1rem 0; font-size: 0.9rem; }
+        .req-box ul { list-style: none; margin-top: 5px; }
         .req-box li::before { content: "🌸 "; }
 
         /* Modal */
@@ -115,25 +115,38 @@
         #rank-modal.active { bottom: 0; }
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; z-index: 1999; }
 
-        /* Review System Styles */
-        #review-trigger {
-            position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px;
-            background: var(--deep-pink); border-radius: 50%; display: flex;
-            justify-content: center; align-items: center; color: white; cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1001;
+        /* Review System */
+        #review-container { position: fixed; bottom: 20px; right: 20px; z-index: 1001; }
+        
+        #rate-bubble {
+            position: absolute; bottom: 70px; right: 0; background: white;
+            padding: 5px 15px; border-radius: 10px; border: 2px solid var(--cherry-pink);
+            font-weight: bold; color: var(--deep-pink); display: none; white-space: nowrap;
         }
+
+        #review-trigger:hover + #rate-bubble { display: block; }
+
+        #review-trigger {
+            width: 60px; height: 60px; background: var(--deep-pink); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; color: white; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
         #review-box {
-            position: fixed; bottom: 90px; right: 20px; width: 300px;
+            position: absolute; bottom: 70px; right: 0; width: 300px;
             background: white; border-radius: 15px; padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: none; z-index: 1001;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: none;
             border: 2px solid var(--cherry-pink);
         }
+
         .stars { color: #ffd700; font-size: 1.2rem; cursor: pointer; margin-bottom: 10px; }
-        .star-input { display: none; }
         #review-text { width: 100%; height: 80px; padding: 10px; border-radius: 10px; border: 1px solid #ddd; resize: none; font-family: inherit; }
         
-        #reviews-display { margin-top: 50px; background: rgba(255,255,255,0.7); padding: 20px; border-radius: 20px; }
-        .review-item { background: white; padding: 15px; border-radius: 10px; margin-bottom: 10px; border: 1px solid var(--soft-pink); }
+        .review-item { 
+            background: white; padding: 15px; border-radius: 10px; margin-bottom: 10px; 
+            border: 1px solid var(--soft-pink); display: flex; gap: 15px; align-items: center;
+        }
+        .review-head { width: 40px; height: 40px; border-radius: 5px; }
 
         .video-section { max-width: 800px; margin: 60px auto; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 5px solid white; }
         .video-section iframe { width: 100%; aspect-ratio: 16/9; display: block; }
@@ -158,19 +171,21 @@
         <button class="close-modal" onclick="closeModal()" style="background:var(--cherry-pink); color:white; border:none; padding:8px 20px; border-radius:50px; cursor:pointer;">Got it!</button>
     </div>
 
-    <!-- Review System -->
-    <div id="review-trigger" onclick="toggleReviewBox()"><i class="fas fa-comment-dots"></i></div>
-    <div id="review-box">
-        <h4 style="color:var(--deep-pink)">Rate Our Server</h4>
-        <div class="stars" id="star-rating">
-            <i class="far fa-star" onclick="setRating(1)"></i>
-            <i class="far fa-star" onclick="setRating(2)"></i>
-            <i class="far fa-star" onclick="setRating(3)"></i>
-            <i class="far fa-star" onclick="setRating(4)"></i>
-            <i class="far fa-star" onclick="setRating(5)"></i>
+    <div id="review-container">
+        <div id="review-trigger" onclick="toggleReviewBox()"><i class="fas fa-comment-dots"></i></div>
+        <div id="rate-bubble">Rate Us!</div>
+        <div id="review-box">
+            <h4 style="color:var(--deep-pink)">Rate Our Server</h4>
+            <div class="stars" id="star-rating">
+                <i class="far fa-star" onclick="setRating(1)"></i>
+                <i class="far fa-star" onclick="setRating(2)"></i>
+                <i class="far fa-star" onclick="setRating(3)"></i>
+                <i class="far fa-star" onclick="setRating(4)"></i>
+                <i class="far fa-star" onclick="setRating(5)"></i>
+            </div>
+            <textarea id="review-text" maxlength="250" placeholder="Max 50 words..."></textarea>
+            <button onclick="submitReview()" style="width:100%; margin-top:10px; background:var(--cherry-pink); color:white; border:none; padding:8px; border-radius:5px; cursor:pointer;">Submit</button>
         </div>
-        <textarea id="review-text" maxlength="250" placeholder="Max 50 words..."></textarea>
-        <button onclick="submitReview()" style="width:100%; margin-top:10px; background:var(--cherry-pink); color:white; border:none; padding:8px; border-radius:5px; cursor:pointer;">Submit</button>
     </div>
 
     <nav>
@@ -190,28 +205,28 @@
         <div class="ranks-grid">
             <div class="rank-card">
                 <h2 class="rank-name c-creator">Creator</h2>
-                <div class="req-box"><strong>PERKS:</strong><ul><li>Unique Server Rank</li></ul></div>
-                <button class="view-btn" onclick="openModal('Creator', 'To get Creator, you must make one video about our server.')">Click to View</button>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Discord Specialist Role</li><li>Unique Server Rank</li><li>YouTube Channel Promotion</li></ul></div>
+                <button class="view-btn" onclick="openModal('Creator', 'To get Creator, you must make one video about our server.')">How to get it</button>
             </div>
             <div class="rank-card">
                 <h2 class="rank-name c-elite">Elite</h2>
-                <div class="req-box"><strong>PERKS:</strong><ul><li>Elite Server Role</li></ul></div>
-                <button class="view-btn" onclick="openModal('Elite', 'To get Elite, you must be in the top 10 wins.')">Click to View</button>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Elite Discord Rank</li><li>Elite Server Role</li><li>Extra Win Bonus</li></ul></div>
+                <button class="view-btn" onclick="openModal('Elite', 'To get Elite, you must be in the top 10 wins.')">How to get it</button>
             </div>
             <div class="rank-card">
                 <h2 class="rank-name c-champ">Champion</h2>
-                <div class="req-box"><strong>PERKS:</strong><ul><li>Champion Server Rank</li></ul></div>
-                <button class="view-btn" onclick="openModal('Champion', 'To get Champion, you must be top 10 in elo.')">Click to View</button>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Exclusive Discord Role</li><li>Champion Server Rank</li></ul></div>
+                <button class="view-btn" onclick="openModal('Champion', 'To get Champion, you must be top 10 in elo.')">How to get it</button>
             </div>
             <div class="rank-card">
                 <h2 class="rank-name c-mvp">MVP</h2>
-                <div class="req-box"><strong>PERKS:</strong><ul><li>MVP Server Rank</li></ul></div>
-                <button class="view-btn" onclick="openModal('MVP', 'To get MVP, you must have top 3 wins.')">Click to View</button>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>50 Party Member Limit</li><li>Extra Bonus on Wins</li><li>MVP Discord & Server Rank</li></ul></div>
+                <button class="view-btn" onclick="openModal('MVP', 'To get MVP, you must have top 3 wins.')">How to get it</button>
             </div>
             <div class="rank-card">
                 <h2 class="rank-name c-vip">VIP</h2>
-                <div class="req-box"><strong>PERKS:</strong><ul><li>VIP Server Rank</li></ul></div>
-                <button class="view-btn" onclick="openModal('VIP', 'To get VIP, be the most active player.')">Click to View</button>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>25 Party Member Limit</li><li>Join Full Server Access</li><li>VIP Discord & Minecraft Rank</li></ul></div>
+                <button class="view-btn" onclick="openModal('VIP', 'To get VIP, be the most active player.')">How to get it</button>
             </div>
         </div>
 
@@ -243,10 +258,8 @@
             <iframe src="https://www.youtube.com/embed/bBDdfRtAcM8" frameborder="0" allowfullscreen></iframe>
         </div>
 
-        <div id="reviews-display">
-            <h3 style="color:var(--deep-pink); margin-bottom:15px">Player Reviews</h3>
-            <div id="reviews-list"></div>
-        </div>
+        <div class="section-title"><h2 style="color:var(--deep-pink)">Reviews</h2></div>
+        <div id="reviews-list"></div>
     </div>
 
     <script>
@@ -292,9 +305,7 @@
         function setRating(n) {
             currentRating = n;
             const stars = document.getElementById('star-rating').children;
-            for(let i=0; i<5; i++) {
-                stars[i].className = i < n ? 'fas fa-star' : 'far fa-star';
-            }
+            for(let i=0; i<5; i++) stars[i].className = i < n ? 'fas fa-star' : 'far fa-star';
         }
 
         function submitReview() {
@@ -302,9 +313,8 @@
             const user = localStorage.getItem('cherry_username') || "Guest";
             const wordCount = text.trim().split(/\s+/).length;
 
-            if (currentRating === 0) return alert("Please rate with stars!");
-            if (!text.trim()) return alert("Write a review!");
-            if (wordCount > 50) return alert("Review must be under 50 words!");
+            if (currentRating === 0) return alert("Rate us!");
+            if (wordCount > 50) return alert("Max 50 words!");
 
             const reviews = JSON.parse(localStorage.getItem('server_reviews') || "[]");
             reviews.unshift({ user, text, rating: currentRating });
@@ -321,8 +331,11 @@
             const reviews = JSON.parse(localStorage.getItem('server_reviews') || "[]");
             list.innerHTML = reviews.map(r => `
                 <div class="review-item">
-                    <strong>${r.user}</strong> <span style="color:#ffd700">${'★'.repeat(r.rating)}</span>
-                    <p>${r.text}</p>
+                    <img src="https://minotar.net/helm/${r.user}/40.png" class="review-head">
+                    <div>
+                        <strong>${r.user}</strong> <span style="color:#ffd700">${'★'.repeat(r.rating)}</span>
+                        <p>${r.text}</p>
+                    </div>
                 </div>
             `).join('');
         }
