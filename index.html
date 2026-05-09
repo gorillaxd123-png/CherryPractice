@@ -173,9 +173,17 @@
             border-radius: 20px;
             padding: 2rem;
             border: 1px solid var(--soft-pink);
-            transition: 0.3s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
+        }
+
+        /* Floating effect on hover */
+        .rank-card:hover { 
+            transform: translateY(-10px);
+            border-color: var(--cherry-pink); 
+            box-shadow: 0 15px 35px rgba(255, 183, 197, 0.4); 
         }
 
         .rank-card img.card-bg {
@@ -193,8 +201,6 @@
             vertical-align: middle;
             margin-right: 10px;
         }
-
-        .rank-card:hover { border-color: var(--cherry-pink); box-shadow: 0 10px 30px rgba(255, 183, 197, 0.4); }
 
         .badge {
             background: var(--soft-pink);
@@ -218,6 +224,44 @@
         .req-box ul { list-style: none; margin-top: 5px; }
         .req-box li { margin-bottom: 3px; }
         .req-box li::before { content: "🌸 "; font-size: 0.8rem; }
+
+        /* Modal / Bottom Menu Popup */
+        #rank-modal {
+            position: fixed;
+            bottom: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            border-radius: 25px 25px 0 0;
+            padding: 2rem;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
+            z-index: 2000;
+            transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+        }
+
+        #rank-modal.active { bottom: 0; }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            z-index: 1999;
+        }
+
+        .close-modal {
+            background: var(--cherry-pink);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-top: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+        }
 
         .video-section {
             max-width: 800px;
@@ -257,6 +301,14 @@
         </div>
     </div>
 
+    <!-- Modal for Rank Instructions -->
+    <div class="modal-overlay" id="overlay" onclick="closeModal()"></div>
+    <div id="rank-modal">
+        <h2 id="modal-title" style="color: var(--deep-pink);">How to get this Rank?</h2>
+        <p id="modal-content" style="margin: 15px 0; font-weight: 500;"></p>
+        <button class="close-modal" onclick="closeModal()">Got it!</button>
+    </div>
+
     <nav>
         <div class="player-profile" id="profile">
             <img src="" id="head-img" class="player-head" alt="Head">
@@ -288,7 +340,7 @@
         </div>
 
         <div class="ranks-grid">
-            <div class="rank-card">
+            <div class="rank-card" onclick="openModal('Creator', 'To get Creator rank, apply in our Discord under the #creator-apps channel. You need at least 500 subscribers and active content on Cherry Practice.')">
                 <span class="badge">Social</span>
                 <h2 class="rank-name c-creator">Creator</h2>
                 <div class="req-box">
@@ -296,7 +348,7 @@
                     <ul><li>Discord Specialist Role</li><li>Unique Server Rank</li><li>YouTube Channel Promotion</li></ul>
                 </div>
             </div>
-            <div class="rank-card">
+            <div class="rank-card" onclick="openModal('Elite', 'Elite rank is obtained by reaching the Top 10 in seasonal global leaderboards or through special event wins!')">
                 <span class="badge">Skill</span>
                 <h2 class="rank-name c-elite">Elite</h2>
                 <div class="req-box">
@@ -304,7 +356,7 @@
                     <ul><li>Elite Discord Rank</li><li>Elite Server Role</li><li>Extra Win Bonus</li></ul>
                 </div>
             </div>
-            <div class="rank-card">
+            <div class="rank-card" onclick="openModal('Champion', 'Reach the Champion division in Ranked match-making and maintain a 70% winrate over 50 games.')">
                 <span class="badge">Placement</span>
                 <h2 class="rank-name c-champ">Champion</h2>
                 <div class="req-box">
@@ -312,7 +364,7 @@
                     <ul><li>Exclusive Discord Role</li><li>Champion Server Rank</li></ul>
                 </div>
             </div>
-            <div class="rank-card">
+            <div class="rank-card" onclick="openModal('MVP', 'MVP is a premium rank. Visit our Discord store or achieve 1,000 kills in a single season to unlock!')">
                 <span class="badge">Killer</span>
                 <h2 class="rank-name c-mvp">MVP</h2>
                 <div class="req-box">
@@ -320,7 +372,7 @@
                     <ul><li>50 Party Member Limit</li><li>Extra Bonus on Wins</li><li>MVP Discord & Server Rank</li></ul>
                 </div>
             </div>
-            <div class="rank-card">
+            <div class="rank-card" onclick="openModal('VIP', 'Achieve 20 hours of playtime in a single month or purchase via our server store.')">
                 <span class="badge">Activity</span>
                 <h2 class="rank-name c-vip">VIP</h2>
                 <div class="req-box">
@@ -335,51 +387,47 @@
         </div>
 
         <div class="ranks-grid">
-            <!-- Iron Divisions -->
             <div class="rank-card">
-                <img src="https://ccvaults.com/assets/10.%20Items/11.%20Materials/Iron_Ingot.png" class="division-icon">
+                <img src="https://i.pinimg.com/originals/08/93/94/0893944aba45ab7279c850c0dff1dcbc.png" class="division-icon">
                 <h2 class="rank-name">Iron Division</h2>
                 <div class="req-box">
                     <ul>
-                        <li>Iron 1: 0 Elo needed</li>
-                        <li>Iron 2: 50 Elo needed</li>
-                        <li>Iron 3: 80 Elo needed</li>
+                        <li>Iron 1: 0 Elo requirements</li>
+                        <li>Iron 2: 50 Elo requirements</li>
+                        <li>Iron 3: 80 Elo requirements</li>
                     </ul>
                 </div>
             </div>
-            <!-- Gold Divisions -->
             <div class="rank-card">
                 <img src="https://minecraft-max.net/upload/iblock/7ce/7ce453b2c15976410d9998236dbf424e.png" class="division-icon">
                 <h2 class="rank-name">Gold Division</h2>
                 <div class="req-box">
                     <ul>
-                        <li>Gold 1: 100 Elo needed</li>
-                        <li>Gold 2: 400 Elo needed</li>
-                        <li>Gold 3: 500 Elo needed</li>
+                        <li>Gold 1: 100 Elo requirements</li>
+                        <li>Gold 2: 400 Elo requirements</li>
+                        <li>Gold 3: 500 Elo requirements</li>
                     </ul>
                 </div>
             </div>
-            <!-- Diamond Divisions -->
             <div class="rank-card">
                 <img src="https://www.pngkey.com/png/full/51-510502_diamond-pattern-png.png" class="division-icon">
                 <h2 class="rank-name">Diamond Division</h2>
                 <div class="req-box">
                     <ul>
-                        <li>Diamond 1: 600 Elo needed</li>
-                        <li>Diamond 2: 700 Elo needed</li>
-                        <li>Diamond 3: 800 Elo needed</li>
+                        <li>Diamond 1: 600 Elo requirements</li>
+                        <li>Diamond 2: 700 Elo requirements</li>
+                        <li>Diamond 3: 800 Elo requirements</li>
                     </ul>
                 </div>
             </div>
-            <!-- Emerald Divisions -->
             <div class="rank-card">
-                <img src="https://ccvaults.com/assets/10.%20Items/11.%20Materials/Emerald.png" class="division-icon">
+                <img src="https://pngset.com/images/minecraft-emerald-green-graphics-art-lighting-transparent-png-854566.png" class="division-icon">
                 <h2 class="rank-name">Emerald Division</h2>
                 <div class="req-box">
                     <ul>
-                        <li>Emerald 1: 900 Elo needed</li>
-                        <li>Emerald 2: 1000 Elo needed</li>
-                        <li>Emerald 3: 1100 Elo needed</li>
+                        <li>Emerald 1: 900 Elo requirements</li>
+                        <li>Emerald 2: 1000 Elo requirements</li>
+                        <li>Emerald 3: 1100 Elo requirements</li>
                     </ul>
                 </div>
             </div>
@@ -405,10 +453,7 @@
 
         function handleLogin() {
             const user = document.getElementById('username-input').value;
-            if (user.trim() === "") {
-                alert("Please enter a username!");
-                return;
-            }
+            if (user.trim() === "") { alert("Please enter a username!"); return; }
             localStorage.setItem('cherry_username', user);
             const overlay = document.getElementById('login-overlay');
             overlay.style.opacity = '0';
@@ -427,12 +472,20 @@
             let cards = document.getElementsByClassName('rank-card');
             for (let i = 0; i < cards.length; i++) {
                 let text = cards[i].innerText.toLowerCase();
-                if (text.includes(input)) {
-                    cards[i].style.display = "block";
-                } else {
-                    cards[i].style.display = "none";
-                }
+                cards[i].style.display = text.includes(input) ? "block" : "none";
             }
+        }
+
+        function openModal(title, content) {
+            document.getElementById('modal-title').innerText = title + " Rank Info";
+            document.getElementById('modal-content').innerText = content;
+            document.getElementById('rank-modal').classList.add('active');
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('rank-modal').classList.remove('active');
+            document.getElementById('overlay').style.display = 'none';
         }
     </script>
 </body>
