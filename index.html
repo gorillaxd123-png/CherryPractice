@@ -25,7 +25,6 @@
             color: var(--text-dark);
             line-height: 1.6;
             overflow-x: hidden;
-            /* Updated Background GIF */
             background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), 
                         url('https://media.tenor.com/r3MeBihAouQAAAAC/cherry-blossom-anime.gif');
             background-size: cover;
@@ -103,6 +102,22 @@
             height: 32px;
             border-radius: 4px;
             border: 1px solid var(--soft-pink);
+        }
+
+        /* Search Bar Style */
+        .search-container {
+            flex-grow: 1;
+            max-width: 400px;
+            margin: 0 20px;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 2px solid var(--soft-pink);
+            outline: none;
+            font-family: inherit;
         }
 
         .player-name {
@@ -190,6 +205,22 @@
         .req-box li { margin-bottom: 3px; }
         .req-box li::before { content: "🌸 "; font-size: 0.8rem; }
 
+        /* Video Container */
+        .video-section {
+            max-width: 800px;
+            margin: 40px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid white;
+        }
+
+        .video-section iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            display: block;
+        }
+
         footer { text-align: center; padding: 3rem; color: #4a4a4a; font-weight: 600; text-shadow: 0 0 10px white; }
 
         .c-creator { color: #FF0000; }
@@ -219,6 +250,10 @@
             <span class="player-name" id="display-name"></span>
         </div>
 
+        <div class="search-container">
+            <input type="text" id="rank-search" placeholder="Search for ranks..." onkeyup="filterRanks()">
+        </div>
+
         <div class="social-buttons">
             <a href="https://discord.gg/j4XmJBdKDS" target="_blank" class="social-btn btn-discord">
                 <i class="fa-brands fa-discord"></i> Discord
@@ -235,7 +270,7 @@
     </header>
 
     <div class="container">
-        <div class="ranks-grid">
+        <div class="ranks-grid" id="ranks-grid">
             
             <div class="rank-card">
                 <img src="https://www.transparentpng.com/download/cherry-blossom/pink-cherry-blossom-free-png-7.png" class="card-bg">
@@ -307,6 +342,11 @@
             </div>
 
         </div>
+
+        <!-- Last Section: Video -->
+        <div class="video-section">
+            <iframe src="https://www.youtube.com/embed/bBDdfRtAcM8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
     </div>
 
     <footer>
@@ -330,6 +370,20 @@
             document.getElementById('display-name').innerText = user;
             document.getElementById('head-img').src = `https://minotar.net/helm/${user}/32.png`;
             document.getElementById('profile').style.visibility = 'visible';
+        }
+
+        function filterRanks() {
+            let input = document.getElementById('rank-search').value.toLowerCase();
+            let cards = document.getElementsByClassName('rank-card');
+
+            for (let i = 0; i < cards.length; i++) {
+                let name = cards[i].getElementsByClassName('rank-name')[0].innerText.toLowerCase();
+                if (name.includes(input)) {
+                    cards[i].style.display = "block";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
         }
     </script>
 </body>
