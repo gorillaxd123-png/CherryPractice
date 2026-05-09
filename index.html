@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cherry Practice | Rank Store</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -12,7 +12,7 @@
             --soft-pink: #ffe4e1;
             --deep-pink: #ff8fa3;
             --pure-white: #ffffff;
-            --text-dark: #4a4a4a;
+            --text-dark: #333333; /* Slightly darker for finer contrast */
             --discord: #5865F2;
             --youtube: #FF0000;
         }
@@ -21,6 +21,7 @@
 
         body {
             font-family: 'Poppins', sans-serif;
+            font-weight: 300; /* Finer text weight */
             background-color: var(--pure-white);
             color: var(--text-dark);
             line-height: 1.6;
@@ -32,123 +33,107 @@
             background-position: center;
         }
 
-        /* Navigation Bar (Now at the very top) */
+        /* Navigation Bar (Top) */
         nav {
             position: sticky; top: 0; background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px); display: flex; justify-content: space-between;
-            align-items: center; padding: 15px 40px; border-bottom: 2px solid var(--soft-pink); z-index: 900;
+            align-items: center; padding: 12px 40px; border-bottom: 1px solid var(--soft-pink); z-index: 900;
         }
 
-        /* Animated Floating Title (Now below nav) */
         .store-header {
             text-align: center;
             margin: 40px 0;
             animation: float 3s ease-in-out infinite;
         }
         @keyframes float {
-            0% { transform: translateY(0px); }
+            0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
         }
-        .store-header h1 { font-size: 3rem; color: var(--deep-pink); text-shadow: 3px 3px 6px rgba(0,0,0,0.1); margin-bottom: -10px; }
-        .store-header h2 { font-size: 1.8rem; color: var(--text-dark); opacity: 0.8; }
+        .store-header h1 { font-size: 2.8rem; font-weight: 700; color: var(--deep-pink); text-shadow: 2px 2px 4px rgba(0,0,0,0.05); }
+        .store-header h2 { font-size: 1.5rem; font-weight: 400; color: var(--text-dark); opacity: 0.7; margin-top: -5px; }
 
         #login-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: url('https://www.icegif.com/wp-content/uploads/2022/03/icegif-581.gif') no-repeat center center;
-            background-size: cover; display: flex; justify-content: center; align-items: center; z-index: 1000;
+            background-size: cover; display: flex; justify-content: center; align-items: center; z-index: 2000;
         }
 
         .login-box {
-            background: rgba(255, 255, 255, 0.95); padding: 3rem; border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(255, 143, 163, 0.2); text-align: center;
-            border: 2px solid var(--cherry-pink); backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.98); padding: 3rem; border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(255, 143, 163, 0.15); text-align: center;
+            border: 1px solid var(--cherry-pink);
         }
 
-        .login-box input { width: 100%; padding: 12px; margin: 1rem 0; border: 2px solid var(--soft-pink); border-radius: 10px; outline: none; }
-        .login-box button { background: var(--cherry-pink); color: white; border: none; padding: 10px 25px; border-radius: 50px; cursor: pointer; font-weight: 600; }
+        .login-box input { width: 100%; padding: 12px; margin: 1rem 0; border: 1px solid var(--soft-pink); border-radius: 8px; outline: none; font-family: inherit; }
+        .login-box button { background: var(--cherry-pink); color: white; border: none; padding: 10px 30px; border-radius: 50px; cursor: pointer; font-weight: 600; }
 
         .player-profile { display: flex; align-items: center; gap: 10px; visibility: hidden; }
-        .player-head { width: 32px; height: 32px; border-radius: 4px; border: 1px solid var(--soft-pink); }
+        .player-head { width: 30px; height: 30px; border-radius: 4px; }
 
-        .search-container { flex-grow: 1; max-width: 400px; margin: 0 20px; }
-        .search-container input { width: 100%; padding: 8px 15px; border-radius: 20px; border: 2px solid var(--soft-pink); outline: none; }
+        .search-container { flex-grow: 1; max-width: 350px; margin: 0 20px; }
+        .search-container input { width: 100%; padding: 8px 18px; border-radius: 20px; border: 1px solid var(--soft-pink); outline: none; font-size: 0.9rem; }
 
-        .social-buttons { display: flex; gap: 15px; }
-        .social-btn { padding: 8px 18px; border-radius: 50px; text-decoration: none; color: white; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .social-buttons { display: flex; gap: 10px; }
+        .social-btn { padding: 8px 15px; border-radius: 50px; text-decoration: none; color: white; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; gap: 6px; }
         .btn-discord { background: var(--discord); }
         .btn-youtube { background: var(--youtube); }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
-        .section-title { text-align: center; margin: 3rem 0 2rem; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
 
-        .ranks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .ranks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
 
         .rank-card {
-            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(5px);
-            border-radius: 20px; padding: 2rem; border: 1px solid var(--soft-pink);
-            transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden;
+            background: rgba(255, 255, 255, 0.9); border-radius: 15px; padding: 1.5rem; 
+            border: 1px solid var(--soft-pink); transition: 0.3s;
             display: flex; flex-direction: column;
         }
-        .rank-card:hover { transform: translateY(-10px); box-shadow: 0 15px 35px rgba(255, 183, 197, 0.4); }
+        .rank-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(255, 183, 197, 0.3); }
 
-        .price-tag { font-weight: 700; color: #27ae60; margin: 5px 0; font-size: 1.1rem; }
+        .rank-name { font-weight: 600; font-size: 1.4rem; }
+        .price-tag { font-weight: 600; color: #2ecc71; font-size: 1rem; margin: 5px 0; }
 
         .purchase-btn {
             background: var(--cherry-pink); color: white; border: none;
-            padding: 8px 20px; border-radius: 50px; font-size: 0.9rem;
-            cursor: pointer; margin-top: auto; font-weight: 600; transition: 0.3s;
-        }
-        .purchase-btn:hover { background: var(--deep-pink); }
-
-        .req-box { background: rgba(255, 249, 250, 0.8); border-left: 4px solid var(--cherry-pink); padding: 12px; margin: 1rem 0; font-size: 0.9rem; }
-        .req-box ul { list-style: none; margin-top: 5px; }
-        .req-box li::before { content: "🌸 "; }
-
-        #purchase-modal {
-            position: fixed; bottom: -100%; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 500px; background: white; border-radius: 25px 25px 0 0;
-            padding: 2.5rem; box-shadow: 0 -10px 40px rgba(0,0,0,0.2); z-index: 2000;
-            transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align: center;
-        }
-        #purchase-modal.active { bottom: 0; }
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; z-index: 1999; }
-        
-        .ticket-btn {
-            display: inline-block; background: var(--discord); color: white; 
-            text-decoration: none; padding: 12px 25px; border-radius: 50px; 
-            font-weight: 600; margin-top: 20px; transition: 0.3s;
+            padding: 8px; border-radius: 50px; font-size: 0.85rem;
+            cursor: pointer; margin-top: 15px; font-weight: 600;
         }
 
-        #review-container { position: fixed; bottom: 20px; right: 20px; z-index: 1001; }
-        #rate-bubble { 
-            position: absolute; bottom: 70px; right: 0; background: white; 
-            padding: 5px 15px; border-radius: 10px; border: 2px solid var(--cherry-pink); 
-            font-weight: bold; color: var(--deep-pink); display: block; white-space: nowrap;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.05); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.8; }
-        }
+        .req-box { background: rgba(255, 249, 250, 0.7); border-left: 3px solid var(--cherry-pink); padding: 10px; margin: 10px 0; font-size: 0.85rem; }
+        .req-box ul { list-style: none; }
 
-        #review-trigger { width: 60px; height: 60px; background: var(--deep-pink); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-        #review-box { position: absolute; bottom: 70px; right: 0; width: 300px; background: white; border-radius: 15px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: none; border: 2px solid var(--cherry-pink); }
-        .stars { color: #ffd700; font-size: 1.2rem; cursor: pointer; margin-bottom: 10px; }
-        #review-text { width: 100%; height: 80px; padding: 10px; border-radius: 10px; border: 1px solid #ddd; resize: none; font-family: inherit; }
-        
+        /* Review Styles Updated for the Delete Button */
         .review-item { 
-            background: white; padding: 15px; border-radius: 10px; margin-bottom: 10px; 
-            border: 1px solid var(--soft-pink); display: flex; gap: 15px; align-items: center; 
+            background: rgba(255, 255, 255, 0.95); padding: 15px 20px; border-radius: 12px; margin-bottom: 12px; 
+            border: 1px solid var(--soft-pink); display: flex; gap: 15px; align-items: flex-start; 
             position: relative;
         }
-        .review-head { width: 40px; height: 40px; border-radius: 5px; }
+        .review-head { width: 40px; height: 40px; border-radius: 6px; flex-shrink: 0; }
+        .review-content { flex-grow: 1; padding-right: 40px; } /* Space for delete button */
+        .review-content strong { font-weight: 600; font-size: 0.95rem; }
+        .review-content p { font-size: 0.9rem; color: #555; }
+        
         .delete-review {
-            position: absolute; right: 15px; top: 15px; color: #ff8fa3;
-            cursor: pointer; opacity: 0.6; transition: 0.3s;
+            position: absolute; right: 15px; top: 15px; width: 28px; height: 28px;
+            background: #fff0f3; color: var(--deep-pink); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; transition: 0.2s; font-size: 0.8rem;
+            border: 1px solid var(--soft-pink);
+            z-index: 10; /* Ensure it stays above content */
         }
-        .delete-review:hover { opacity: 1; color: #ff0000; }
+        .delete-review:hover { background: #ff8fa3; color: white; }
+
+        /* Review Floating UI */
+        #review-container { position: fixed; bottom: 20px; right: 20px; z-index: 1100; }
+        #rate-bubble { 
+            position: absolute; bottom: 75px; right: 0; background: white; 
+            padding: 5px 15px; border-radius: 10px; border: 1px solid var(--cherry-pink); 
+            font-weight: 600; color: var(--deep-pink); font-size: 0.8rem;
+        }
+        #review-trigger { width: 55px; height: 55px; background: var(--deep-pink); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        #review-box { position: absolute; bottom: 75px; right: 0; width: 280px; background: white; border-radius: 15px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); display: none; border: 1px solid var(--cherry-pink); }
+        
+        .stars { color: #ffd700; font-size: 1rem; cursor: pointer; margin: 5px 0; }
+        #review-text { width: 100%; height: 70px; padding: 10px; border-radius: 8px; border: 1px solid #eee; resize: none; font-family: inherit; font-size: 0.85rem; }
 
         .c-creator { color: #FF0000; } .c-elite { color: #D4AF37; } .c-champ { color: #5dade2; } .c-mvp { color: #a569bd; } .c-vip { color: #45b39d; }
     </style>
@@ -157,45 +142,61 @@
 
     <div id="login-overlay">
         <div class="login-box">
-            🌸 <h2>Welcome Player</h2>
-            <input type="text" id="username-input" placeholder="Username..." required>
-            <br><button onclick="handleLogin()">Enter Store</button>
+            <h2 style="color: var(--deep-pink); font-weight: 600; margin-bottom: 5px;">Welcome Player</h2>
+            <p style="font-size: 0.85rem; opacity: 0.7;">Access the Cherry Practice Rank Store</p>
+            <input type="text" id="username-input" placeholder="Minecraft Username..." required>
+            <br><button onclick="handleLogin()">Login</button>
         </div>
     </div>
 
-    <!-- Navigation Bar (Top) -->
     <nav>
         <div class="player-profile" id="profile">
             <img src="" id="head-img" class="player-head">
-            <span id="display-name" style="font-weight:600; color:var(--deep-pink)"></span>
+            <span id="display-name" style="font-weight:600; color:var(--deep-pink); font-size: 0.9rem;"></span>
         </div>
-        <div class="search-container"><input type="text" id="rank-search" placeholder="Search..." onkeyup="filterContent()"></div>
+        <div class="search-container"><input type="text" id="rank-search" placeholder="Search ranks or divisions..." onkeyup="filterContent()"></div>
         <div class="social-buttons">
             <a href="https://discord.gg/j4XmJBdKDS" class="social-btn btn-discord"><i class="fa-brands fa-discord"></i> Discord</a>
             <a href="https://www.youtube.com/@Hornet133" class="social-btn btn-youtube"><i class="fa-brands fa-youtube"></i> YouTube</a>
         </div>
     </nav>
 
-    <!-- Animated Header (Below Nav) -->
     <div class="store-header">
         <h1>Cherry Practice</h1>
         <h2>Rank Store</h2>
     </div>
 
-    <div class="modal-overlay" id="overlay" onclick="closeModal()"></div>
-    <div id="purchase-modal">
-        <h2 id="modal-title" style="color: var(--deep-pink);">Purchase Rank</h2>
-        <p style="margin: 15px 0; font-weight: 500;">Create a ticket in our discord to purchase rank</p>
-        <a href="https://discord.gg/j4XmJBdKDS" class="ticket-btn">Create Ticket</a>
-        <br><br>
-        <button onclick="closeModal()" style="background:#eee; border:none; padding:8px 20px; border-radius:50px; cursor:pointer;">Close</button>
+    <div class="container">
+        <div class="ranks-grid">
+            <div class="rank-card">
+                <h2 class="rank-name c-creator">Creator</h2>
+                <p class="price-tag">Partnered Content</p>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Discord Specialist Role</li><li>Unique Tag</li></ul></div>
+                <button class="purchase-btn" onclick="alert('Ticket required')">Redeem</button>
+            </div>
+            <div class="rank-card">
+                <h2 class="rank-name c-elite">Elite</h2>
+                <p class="price-tag">₹20 / $0.21</p>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Elite Server Prefix</li><li>Discord Role</li></ul></div>
+                <button class="purchase-btn" onclick="alert('Ticket required')">Purchase</button>
+            </div>
+            <div class="rank-card">
+                <h2 class="rank-name c-champ">Champion</h2>
+                <p class="price-tag">₹10 / $0.11</p>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Champ Prefix</li><li>Special Access</li></ul></div>
+                <button class="purchase-btn" onclick="alert('Ticket required')">Purchase</button>
+            </div>
+        </div>
+
+        <div style="margin-top: 50px; margin-bottom: 20px;"><h2 style="color:var(--deep-pink); font-weight: 600; text-align: center;">Player Reviews</h2></div>
+        <div id="reviews-list"></div>
     </div>
 
     <div id="review-container">
         <div id="review-trigger" onclick="toggleReviewBox()"><i class="fas fa-comment-dots"></i></div>
         <div id="rate-bubble">Rate Us!</div>
         <div id="review-box">
-            <h4 style="color:var(--deep-pink)">Rate Our Server</h4>
+            <h4 style="color:var(--deep-pink); font-weight: 600;">Leave a Review</h4>
             <div class="stars" id="star-rating">
                 <i class="far fa-star" onclick="setRating(1)"></i>
                 <i class="far fa-star" onclick="setRating(2)"></i>
@@ -203,71 +204,9 @@
                 <i class="far fa-star" onclick="setRating(4)"></i>
                 <i class="far fa-star" onclick="setRating(5)"></i>
             </div>
-            <textarea id="review-text" maxlength="250" placeholder="Max 50 words..."></textarea>
-            <button onclick="submitReview()" style="width:100%; margin-top:10px; background:var(--cherry-pink); color:white; border:none; padding:8px; border-radius:5px; cursor:pointer;">Submit</button>
+            <textarea id="review-text" maxlength="250" placeholder="Tell us what you think..."></textarea>
+            <button onclick="submitReview()" style="width:100%; margin-top:10px; background:var(--cherry-pink); color:white; border:none; padding:8px; border-radius:5px; cursor:pointer; font-weight: 600;">Submit Review</button>
         </div>
-    </div>
-
-    <div class="container">
-        <div class="ranks-grid">
-            <div class="rank-card">
-                <h2 class="rank-name c-creator">Creator</h2>
-                <p class="price-tag">Upload Video on Channel</p>
-                <div class="req-box"><strong>PERKS:</strong><ul><li>Discord Specialist Role</li><li>Unique Server Rank</li></ul></div>
-                <button class="purchase-btn" onclick="openModal('Creator')">Purchase</button>
-            </div>
-            <div class="rank-card">
-                <h2 class="rank-name c-elite">Elite</h2>
-                <p class="price-tag">₹20 / $0.21</p>
-                <div class="req-box"><strong>PERKS:</strong><ul><li>Elite Discord Rank</li><li>Elite Server Role</li></ul></div>
-                <button class="purchase-btn" onclick="openModal('Elite')">Purchase</button>
-            </div>
-            <div class="rank-card">
-                <h2 class="rank-name c-champ">Champion</h2>
-                <p class="price-tag">₹10 / $0.11</p>
-                <div class="req-box"><strong>PERKS:</strong><ul><li>Exclusive Discord Role</li><li>Champion Server Rank</li></ul></div>
-                <button class="purchase-btn" onclick="openModal('Champion')">Purchase</button>
-            </div>
-            <div class="rank-card">
-                <h2 class="rank-name c-mvp">MVP</h2>
-                <p class="price-tag">₹60 / $0.64</p>
-                <div class="req-box"><strong>PERKS:</strong><ul><li>50 Party Member Limit</li><li>MVP Rank</li></ul></div>
-                <button class="purchase-btn" onclick="openModal('MVP')">Purchase</button>
-            </div>
-            <div class="rank-card">
-                <h2 class="rank-name c-vip">VIP</h2>
-                <p class="price-tag">₹40 / $0.42</p>
-                <div class="req-box"><strong>PERKS:</strong><ul><li>25 Party Member Limit</li><li>VIP Rank</li></ul></div>
-                <button class="purchase-btn" onclick="openModal('VIP')">Purchase</button>
-            </div>
-        </div>
-
-        <div class="section-title"><h2 style="color:var(--deep-pink)">Divisions Achievement Guide</h2></div>
-        <div class="ranks-grid">
-            <div class="rank-card">
-                <img src="https://i.pinimg.com/originals/08/93/94/0893944aba45ab7279c850c0dff1dcbc.png" style="width:40px">
-                <h2 class="rank-name">Iron Division</h2>
-                <div class="req-box"><ul><li>Iron 1: 0 Elo</li><li>Iron 2: 50 Elo</li><li>Iron 3: 80 Elo</li></ul></div>
-            </div>
-            <div class="rank-card">
-                <img src="https://minecraft-max.net/upload/iblock/7ce/7ce453b2c15976410d9998236dbf424e.png" style="width:40px">
-                <h2 class="rank-name">Gold Division</h2>
-                <div class="req-box"><ul><li>Gold 1: 100 Elo</li><li>Gold 2: 400 Elo</li><li>Gold 3: 500 Elo</li></ul></div>
-            </div>
-            <div class="rank-card">
-                <img src="https://www.pngkey.com/png/full/51-510502_diamond-pattern-png.png" style="width:40px">
-                <h2 class="rank-name">Diamond Division</h2>
-                <div class="req-box"><ul><li>Diamond 1: 600 Elo</li><li>Diamond 2: 700 Elo</li><li>Diamond 3: 800 Elo</li></ul></div>
-            </div>
-            <div class="rank-card">
-                <img src="https://ccvaults.com/assets/10.%20Items/11.%20Materials/Emerald.png" style="width:40px">
-                <h2 class="rank-name">Emerald Division</h2>
-                <div class="req-box"><ul><li>Emerald 1: 900 Elo</li><li>Emerald 2: 1000 Elo</li><li>Emerald 3: 1100 Elo</li></ul></div>
-            </div>
-        </div>
-
-        <div class="section-title"><h2 style="color:var(--deep-pink)">Reviews</h2></div>
-        <div id="reviews-list"></div>
     </div>
 
     <script>
@@ -280,7 +219,7 @@
 
         function handleLogin() {
             const user = document.getElementById('username-input').value;
-            if (!user.trim()) return alert("Enter username!");
+            if (!user.trim()) return;
             localStorage.setItem('cherry_username', user);
             document.getElementById('login-overlay').style.display = 'none';
             applyLogin(user);
@@ -288,24 +227,14 @@
 
         function applyLogin(user) {
             document.getElementById('display-name').innerText = user;
-            document.getElementById('head-img').src = `https://minotar.net/helm/${user}/32.png`;
+            document.getElementById('head-img').src = `https://minotar.net/helm/${user}/30.png`;
             document.getElementById('profile').style.visibility = 'visible';
-        }
-
-        function openModal(rank) {
-            document.getElementById('modal-title').innerText = "Buy " + rank;
-            document.getElementById('purchase-modal').classList.add('active');
-            document.getElementById('overlay').style.display = 'block';
-        }
-
-        function closeModal() {
-            document.getElementById('purchase-modal').classList.remove('active');
-            document.getElementById('overlay').style.display = 'none';
         }
 
         function toggleReviewBox() {
             const box = document.getElementById('review-box');
             box.style.display = box.style.display === 'block' ? 'none' : 'block';
+            document.getElementById('rate-bubble').style.display = 'none';
         }
 
         function setRating(n) {
@@ -317,7 +246,7 @@
         function submitReview() {
             const text = document.getElementById('review-text').value;
             const user = localStorage.getItem('cherry_username') || "Guest";
-            if (currentRating === 0 || !text.trim()) return alert("Fill all fields!");
+            if (currentRating === 0 || !text.trim()) return;
             const reviews = JSON.parse(localStorage.getItem('server_reviews') || "[]");
             reviews.unshift({ id: Date.now(), user, text, rating: currentRating });
             localStorage.setItem('server_reviews', JSON.stringify(reviews));
@@ -337,11 +266,13 @@
             list.innerHTML = reviews.map(r => `
                 <div class="review-item">
                     <img src="https://minotar.net/helm/${r.user}/40.png" class="review-head">
-                    <div>
-                        <strong>${r.user}</strong> <span style="color:#ffd700">${'★'.repeat(r.rating)}</span>
+                    <div class="review-content">
+                        <strong>${r.user}</strong> <span style="color:#ffd700; font-size: 0.8rem;">${'★'.repeat(r.rating)}</span>
                         <p>${r.text}</p>
                     </div>
-                    <i class="fas fa-trash delete-review" onclick="deleteReview(${r.id})"></i>
+                    <div class="delete-review" title="Delete Review" onclick="deleteReview(${r.id})">
+                        <i class="fas fa-trash"></i>
+                    </div>
                 </div>
             `).join('');
         }
