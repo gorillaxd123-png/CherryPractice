@@ -35,7 +35,9 @@
         #login-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 228, 225, 0.98);
+            /* Login Background GIF */
+            background: url('https://www.icegif.com/wp-content/uploads/2022/03/icegif-581.gif') no-repeat center center;
+            background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -44,12 +46,13 @@
         }
 
         .login-box {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             padding: 3rem;
             border-radius: 20px;
             box-shadow: 0 10px 40px rgba(255, 143, 163, 0.2);
             text-align: center;
             border: 2px solid var(--cherry-pink);
+            backdrop-filter: blur(5px);
         }
 
         .login-box h2 { color: var(--deep-pink); margin-bottom: 1rem; }
@@ -104,7 +107,6 @@
             border: 1px solid var(--soft-pink);
         }
 
-        /* Search Bar Style */
         .search-container {
             flex-grow: 1;
             max-width: 400px;
@@ -205,7 +207,6 @@
         .req-box li { margin-bottom: 3px; }
         .req-box li::before { content: "🌸 "; font-size: 0.8rem; }
 
-        /* Video Container */
         .video-section {
             max-width: 800px;
             margin: 40px auto;
@@ -271,7 +272,6 @@
 
     <div class="container">
         <div class="ranks-grid" id="ranks-grid">
-            
             <div class="rank-card">
                 <img src="https://www.transparentpng.com/download/cherry-blossom/pink-cherry-blossom-free-png-7.png" class="card-bg">
                 <span class="badge">Social</span>
@@ -340,10 +340,8 @@
                     </ul>
                 </div>
             </div>
-
         </div>
 
-        <!-- Last Section: Video -->
         <div class="video-section">
             <iframe src="https://www.youtube.com/embed/bBDdfRtAcM8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
@@ -354,6 +352,15 @@
     </footer>
 
     <script>
+        // Check for saved login on load
+        window.onload = function() {
+            const savedUser = localStorage.getItem('cherry_username');
+            if (savedUser) {
+                applyLogin(savedUser);
+                document.getElementById('login-overlay').style.display = 'none';
+            }
+        };
+
         function handleLogin() {
             const user = document.getElementById('username-input').value;
             if (user.trim() === "") {
@@ -361,12 +368,18 @@
                 return;
             }
 
+            localStorage.setItem('cherry_username', user);
+            
             const overlay = document.getElementById('login-overlay');
             overlay.style.opacity = '0';
             setTimeout(() => {
                 overlay.style.display = 'none';
             }, 500);
 
+            applyLogin(user);
+        }
+
+        function applyLogin(user) {
             document.getElementById('display-name').innerText = user;
             document.getElementById('head-img').src = `https://minotar.net/helm/${user}/32.png`;
             document.getElementById('profile').style.visibility = 'visible';
