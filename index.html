@@ -147,21 +147,19 @@
         .delete-review {
             position: absolute; right: 15px; top: 15px; color: #ff8fa3;
             cursor: pointer; opacity: 0.6; transition: 0.3s;
-            display: none; /* Hidden by default, shown via JS for owner */
         }
         .delete-review:hover { opacity: 1; color: #ff0000; }
 
         .c-creator { color: #FF0000; } .c-elite { color: #D4AF37; } .c-champ { color: #5dade2; } .c-mvp { color: #a569bd; } .c-vip { color: #45b39d; }
 
-        /* Mobile Optimization */
-        @media (max-width: 768px) {
-            nav { padding: 10px 15px; flex-direction: column; gap: 10px; }
-            .search-container { max-width: 100%; width: 100%; order: 3; }
-            .player-profile { order: 1; align-self: flex-start; }
-            .social-buttons { order: 2; align-self: flex-end; margin-top: -40px; }
+        /* Mobile Fixes */
+        @media (max-width: 600px) {
+            nav { padding: 10px; flex-wrap: wrap; justify-content: center; gap: 10px; }
+            .search-container { max-width: 100%; order: 3; }
+            .social-buttons { gap: 5px; }
+            .social-btn { padding: 5px 10px; font-size: 0.7rem; }
             .store-header h1 { font-size: 2rem; }
             .ranks-grid { grid-template-columns: 1fr; }
-            #review-box { width: 260px; right: 0; }
         }
     </style>
 </head>
@@ -294,7 +292,7 @@
             localStorage.setItem('cherry_username', user);
             document.getElementById('login-overlay').style.display = 'none';
             applyLogin(user);
-            displayReviews(); // Refresh to show delete buttons for this user
+            displayReviews(); // Refresh list to show delete buttons if applicable
         }
 
         function applyLogin(user) {
@@ -337,4 +335,35 @@
 
         function deleteReview(id) {
             let reviews = JSON.parse(localStorage.getItem('server_reviews') || "[]");
-            reviews = reviews.filter(r =>
+            reviews = reviews.filter(r => r.id !== id);
+            localStorage.setItem('server_reviews', JSON.stringify(reviews));
+            displayReviews();
+        }
+
+        function displayReviews() {
+            const list = document.getElementById('reviews-list');
+            const reviews = JSON.parse(localStorage.getItem('server_reviews') || "[]");
+            const currentUser = localStorage.getItem('cherry_username');
+
+            list.innerHTML = reviews.map(r => `
+                <div class="review-item">
+                    <img src="https://minotar.net/helm/${r.user}/40.png" class="review-head">
+                    <div>
+                        <strong>${r.user}</strong> <span style="color:#ffd700">${'★'.repeat(r.rating)}</span>
+                        <p>${r.text}</p>
+                    </div>
+                    ${r.user === currentUser ? `<i class="fas fa-trash delete-review" onclick="deleteReview(${r.id})"></i>` : ''}
+                </div>
+            `).join('');
+        }
+
+        function filterContent() {
+            let input = document.getElementById('rank-search').value.toLowerCase();
+            let cards = document.getElementsByClassName('rank-card');
+            for (let i = 0; i < cards.length; i++) {
+                cards[i].style.display = cards[i].innerText.toLowerCase().includes(input) ? "flex" : "none";
+            }
+        }
+    </script>
+</body>
+</html>
