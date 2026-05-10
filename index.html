@@ -152,14 +152,11 @@
 
         .c-creator { color: #FF0000; } .c-elite { color: #D4AF37; } .c-champ { color: #5dade2; } .c-mvp { color: #a569bd; } .c-vip { color: #45b39d; }
 
-        /* Mobile Fixes */
-        @media (max-width: 600px) {
-            nav { padding: 10px; flex-wrap: wrap; justify-content: center; gap: 10px; }
-            .search-container { max-width: 100%; order: 3; }
-            .social-buttons { gap: 5px; }
-            .social-btn { padding: 5px 10px; font-size: 0.7rem; }
-            .store-header h1 { font-size: 2rem; }
+        /* Added Mobile Grid Fix - Only Change */
+        @media (max-width: 768px) {
             .ranks-grid { grid-template-columns: 1fr; }
+            nav { padding: 10px; flex-wrap: wrap; }
+            .search-container { order: 3; max-width: 100%; margin: 10px 0; }
         }
     </style>
 </head>
@@ -283,7 +280,7 @@
         window.onload = function() {
             const savedUser = localStorage.getItem('cherry_username');
             if (savedUser) { applyLogin(savedUser); document.getElementById('login-overlay').style.display = 'none'; }
-            displayReviews();
+            displayReviews(); // Now displays globally on load
         };
 
         function handleLogin() {
@@ -292,7 +289,7 @@
             localStorage.setItem('cherry_username', user);
             document.getElementById('login-overlay').style.display = 'none';
             applyLogin(user);
-            displayReviews(); // Refresh list to show delete buttons if applicable
+            displayReviews(); // Refresh so delete buttons appear for this user
         }
 
         function applyLogin(user) {
@@ -343,7 +340,7 @@
         function displayReviews() {
             const list = document.getElementById('reviews-list');
             const reviews = JSON.parse(localStorage.getItem('server_reviews') || "[]");
-            const currentUser = localStorage.getItem('cherry_username');
+            const currentUser = localStorage.getItem('cherry_username'); // Get logged in user
 
             list.innerHTML = reviews.map(r => `
                 <div class="review-item">
