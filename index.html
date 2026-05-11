@@ -32,14 +32,12 @@
             background-position: center;
         }
 
-        /* Navigation Bar (Now at the very top) */
         nav {
             position: sticky; top: 0; background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px); display: flex; justify-content: space-between;
             align-items: center; padding: 15px 40px; border-bottom: 2px solid var(--soft-pink); z-index: 900;
         }
 
-        /* Animated Floating Title (Now below nav) */
         .store-header {
             text-align: center;
             margin: 40px 0;
@@ -151,8 +149,8 @@
         .delete-review:hover { opacity: 1; color: #ff0000; }
 
         .c-creator { color: #FF0000; } .c-elite { color: #D4AF37; } .c-champ { color: #5dade2; } .c-mvp { color: #a569bd; } .c-vip { color: #45b39d; }
+        .c-mystic { color: #9b59b6; border: 2px solid #9b59b6; } /* Top Rank Highlight */
 
-        /* Added Mobile Grid Fix - Only Change */
         @media (max-width: 768px) {
             .ranks-grid { grid-template-columns: 1fr; }
             nav { padding: 10px; flex-wrap: wrap; }
@@ -216,9 +214,106 @@
     <div class="container">
         <div class="ranks-grid">
             <div class="rank-card">
+                <h2 class="rank-name c-mystic">Mystic</h2>
+                <p class="price-tag">₹500</p>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Ultimate Mystic Discord Rank</li><li>God-Tier Server Role</li></ul></div>
+                <button class="purchase-btn" onclick="openModal('Mystic')">Purchase</button>
+            </div>
+            <div class="rank-card">
+                <h2 class="rank-name" style="color:#e67e22">Emperor</h2>
+                <p class="price-tag">₹450</p>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Emperor Discord Rank</li><li>Emperor Server Role</li></ul></div>
+                <button class="purchase-btn" onclick="openModal('Emperor')">Purchase</button>
+            </div>
+            <div class="rank-card">
+                <h2 class="rank-name" style="color:#f1c40f">Slayer</h2>
+                <p class="price-tag">₹400</p>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Slayer Discord Rank</li><li>Slayer Server Role</li></ul></div>
+                <button class="purchase-btn" onclick="openModal('Slayer')">Purchase</button>
+            </div>
+            <div class="rank-card">
+                <h2 class="rank-name" style="color:#3498db">Legend</h2>
+                <p class="price-tag">₹380</p>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Legend Discord Rank</li><li>Legend Server Role</li></ul></div>
+                <button class="purchase-btn" onclick="openModal('Legend')">Purchase</button>
+            </div>
+            <div class="rank-card">
+                <h2 class="rank-name" style="color:#1abc9c">Titan</h2>
+                <p class="price-tag">₹350</p>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Titan Discord Rank</li><li>Titan Server Role</li></ul></div>
+                <button class="purchase-btn" onclick="openModal('Titan')">Purchase</button>
+            </div>
+            <div class="rank-card">
+                <h2 class="rank-name" style="color:#ff69b4">Sakura</h2>
+                <p class="price-tag">₹320</p>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Sakura Discord Rank</li><li>Sakura Server Role</li></ul></div>
+                <button class="purchase-btn" onclick="openModal('Sakura')">Purchase</button>
+            </div>
+            <div class="rank-card">
+                <h2 class="rank-name" style="color:#2c3e50">Samurai</h2>
+                <p class="price-tag">₹300</p>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Samurai Discord Rank</li><li>Samurai Server Role</li></ul></div>
+                <button class="purchase-btn" onclick="openModal('Samurai')">Purchase</button>
+            </div>
+            <div class="rank-card">
+                <h2 class="rank-name" style="color:#9b59b6">Nova</h2>
+                <p class="price-tag">₹280</p>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Nova Discord Rank</li><li>Nova Server Role</li></ul></div>
+                <button class="purchase-btn" onclick="openModal('Nova')">Purchase</button>
+            </div>
+            <div class="rank-card">
+                <h2 class="rank-name" style="color:#e74c3c">Inferno</h2>
+                <p class="price-tag">₹250</p>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Inferno Discord Rank</li><li>Inferno Server Role</li></ul></div>
+                <button class="purchase-btn" onclick="openModal('Inferno')">Purchase</button>
+            </div>
+            <div class="rank-card">
+                <h2 class="rank-name" style="color:#7f8c8d">Phantom</h2>
+                <p class="price-tag">₹220</p>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Phantom Discord Rank</li><li>Phantom Server Role</li></ul></div>
+                <button class="purchase-btn" onclick="openModal('Phantom')">Purchase</button>
+            </div>
+            <div class="rank-card">
+                <h2 class="rank-name" style="color:#ecf0f1; text-shadow: 0 0 5px #bdc3c7;">Seraph</h2>
+                <p class="price-tag">₹200</p>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Seraph Discord Rank</li><li>Seraph Server Role</li></ul></div>
+                <button class="purchase-btn" onclick="openModal('Seraph')">Purchase</button>
+            </div>
+            <div class="rank-card">
+                <h2 class="rank-name" style="color:#c0392b">Gladiator</h2>
+                <p class="price-tag">₹180</p>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Gladiator Discord Rank</li><li>Gladiator Server Role</li></ul></div>
+                <button class="purchase-btn" onclick="openModal('Gladiator')">Purchase</button>
+            </div>
+            <div class="rank-card">
+                <h2 class="rank-name" style="color:#34495e">Eclipse</h2>
+                <p class="price-tag">₹150</p>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Eclipse Discord Rank</li><li>Eclipse Server Role</li></ul></div>
+                <button class="purchase-btn" onclick="openModal('Eclipse')">Purchase</button>
+            </div>
+            <div class="rank-card">
+                <h2 class="rank-name" style="color:#f39c12">Aura</h2>
+                <p class="price-tag">₹120</p>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Aura Discord Rank</li><li>Aura Server Role</li></ul></div>
+                <button class="purchase-btn" onclick="openModal('Aura')">Purchase</button>
+            </div>
+            <div class="rank-card">
+                <h2 class="rank-name c-creator">Youtuber</h2>
+                <p class="price-tag">₹100 (Support)</p>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Youtuber Discord Rank</li><li>Youtuber Server Role</li></ul></div>
+                <button class="purchase-btn" onclick="openModal('Youtuber')">Purchase</button>
+            </div>
+            <div class="rank-card">
+                <h2 class="rank-name" style="color:#2ecc71">Famous</h2>
+                <p class="price-tag">₹80</p>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Famous Discord Rank</li><li>Famous Server Role</li></ul></div>
+                <button class="purchase-btn" onclick="openModal('Famous')">Purchase</button>
+            </div>
+
+            <div class="rank-card">
                 <h2 class="rank-name c-creator">Creator</h2>
-                <p class="price-tag">Upload Video on Channel</p>
-                <div class="req-box"><strong>PERKS:</strong><ul><li>Discord Specialist Role</li><li>Unique Server Rank</li></ul></div>
+                <p class="price-tag">Upload Video</p>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Discord Specialist</li><li>Unique Server Rank</li></ul></div>
                 <button class="purchase-btn" onclick="openModal('Creator')">Purchase</button>
             </div>
             <div class="rank-card">
@@ -230,19 +325,19 @@
             <div class="rank-card">
                 <h2 class="rank-name c-champ">Champion</h2>
                 <p class="price-tag">₹150</p>
-                <div class="req-box"><strong>PERKS:</strong><ul><li>Exclusive Discord Role</li><li>Champion Server Rank</li></ul></div>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>Exclusive Discord Role</li><li>Champion Rank</li></ul></div>
                 <button class="purchase-btn" onclick="openModal('Champion')">Purchase</button>
             </div>
             <div class="rank-card">
                 <h2 class="rank-name c-mvp">MVP</h2>
                 <p class="price-tag">₹100</p>
-                <div class="req-box"><strong>PERKS:</strong><ul><li>50 Party Member Limit</li><li>MVP Rank</li></ul></div>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>50 Party Limit</li><li>MVP Rank</li></ul></div>
                 <button class="purchase-btn" onclick="openModal('MVP')">Purchase</button>
             </div>
             <div class="rank-card">
                 <h2 class="rank-name c-vip">VIP</h2>
                 <p class="price-tag">₹50</p>
-                <div class="req-box"><strong>PERKS:</strong><ul><li>25 Party Member Limit</li><li>VIP Rank</li></ul></div>
+                <div class="req-box"><strong>PERKS:</strong><ul><li>25 Party Limit</li><li>VIP Rank</li></ul></div>
                 <button class="purchase-btn" onclick="openModal('VIP')">Purchase</button>
             </div>
         </div>
@@ -280,7 +375,7 @@
         window.onload = function() {
             const savedUser = localStorage.getItem('cherry_username');
             if (savedUser) { applyLogin(savedUser); document.getElementById('login-overlay').style.display = 'none'; }
-            displayReviews(); // Now displays globally on load
+            displayReviews();
         };
 
         function handleLogin() {
@@ -289,7 +384,7 @@
             localStorage.setItem('cherry_username', user);
             document.getElementById('login-overlay').style.display = 'none';
             applyLogin(user);
-            displayReviews(); // Refresh so delete buttons appear for this user
+            displayReviews();
         }
 
         function applyLogin(user) {
@@ -340,7 +435,7 @@
         function displayReviews() {
             const list = document.getElementById('reviews-list');
             const reviews = JSON.parse(localStorage.getItem('server_reviews') || "[]");
-            const currentUser = localStorage.getItem('cherry_username'); // Get logged in user
+            const currentUser = localStorage.getItem('cherry_username');
 
             list.innerHTML = reviews.map(r => `
                 <div class="review-item">
